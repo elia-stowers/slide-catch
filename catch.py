@@ -5,7 +5,7 @@ import pygame, simpleGE, random
 class Coin(simpleGE.Sprite):
     def __init__(self, scene):
         super().__init__(scene)
-        self.setImage("debris.png")
+        self.setImage("apple.jpg")
         self.setSize(25, 25)
         self.minSpeed = 2
         self.maxSpeed = 8
@@ -51,14 +51,28 @@ class LblTime(simpleGE.Label):
         super().__init__()
         self.text = "Time left: 10"
         self.center = (500, 30)
-    
- 
+
+class Obstacle(simpleGE):
+    def __init__(self, x, y):
+        super().__init__(x, y, OBSTACLE_SIZE, OBSTACLE_SIZE)
+        self.BadApple.jpj
+
+    def update(self):
+        self.move(0, OBSTACLE_SPEED)
+
+ def check_collisions(self):
+        player_rect = self.player.get_rect()
+        for obstacle in self.obstacles:
+            if player_rect.colliderect(obstacle.get_rect()):
+                print("Game Over!")
+                self.quit()
+
 class Game(simpleGE.Scene):
     def __init__(self):
         super().__init__()
         self.setImage("TC.jpg")
         
-        self.sndApple = simpleGE.Sound("apple")
+        self.sndApple = simpleGE.Sound("apple-crunch-215258.mp3")
         self.numApple = 10
         self.score = 0
         self.lblScore = LblScore()
